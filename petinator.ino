@@ -387,6 +387,10 @@ LiquidLine set_speed_line(0, 3, "Set Speed: ", target_speed);
 // Enable
 LiquidLine enable_heater_line(0, 4, "Start Heater: ", heatingEnabled);
 LiquidLine enable_puller_line(0, 5, "Start Puller: ", pullingEnabled);
+
+// Save Settings to EEPROM 
+LiquidLine save_settings_line(0, 6, "Save Settings");
+
 // LiquidScreen enable_screen(enable_heater_line, enable_puller_line, set_temp_line, set_speed_line, actual_temp_line, actual_speed_line);
 // LiquidLine start_line(0, 0, "Start: ", menu_message);
 // LiquidScreen enable_screen(start_line);
@@ -451,11 +455,11 @@ void setup()
 
     set_speed_line.attach_function(1, increase_speed);
     set_speed_line.attach_function(2, decrease_speed);
-
     enable_heater_line.attach_function(1, toggle_heater);
 
     enable_puller_line.attach_function(1, toggle_puller);
     // start_line.attach_function(1, toggle_running);
+    save_settings_line.attach_function(1, SaveParameters);
 
     set_temp_line.set_decimalPlaces(0);
     actual_temp_line.set_decimalPlaces(0);
@@ -466,6 +470,7 @@ void setup()
     main_screen.add_line(set_speed_line);
     main_screen.add_line(actual_temp_line);
     main_screen.add_line(actual_speed_line);
+    main_screen.add_line(save_settings_line);
     main_screen.set_displayLineCount(2);
     // menu.add_screen(welcome_screen);
     // menu.add_screen(status_screen);
